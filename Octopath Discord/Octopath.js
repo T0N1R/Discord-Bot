@@ -86,21 +86,21 @@ thief = new Class(1, 250, 40, 88, 64, 80, 64, 96, "Dagger", "Sword", "Steal", "W
 //Haanit
 hunter = new Class(1, 250, 40, 96, 64, 80, 64, 80, "Bow", "Axe", "Rain of Arrows", "True Strike", "Thunderbird", "Leghold Trap", "Mercy Strike", "Arrowstorm", "Take Aim", "Draefindi's Rage", "Basic atk", "Defend", 1, null);
 
-player1 = new Character(false, "Ophilia", "", cleric, cleric.arma1, cleric.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
+player1 = new Character(false, "Ophilia (Cleric)", "", cleric, cleric.arma1, cleric.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
-player2 = new Character(false, "Cyrus", "", scholar, scholar.arma1, scholar.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
+player2 = new Character(false, "Cyrus (Scholar)", "", scholar, scholar.arma1, scholar.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
-player3 = new Character(false, "Tressa", "", merchant, merchant.arma1, merchant.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
+player3 = new Character(false, "Tressa (Merchant)", "", merchant, merchant.arma1, merchant.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
-player4 = new Character(false, "Olberic", "", warrior, warrior.arma1, warrior.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
+player4 = new Character(false, "Olberic (Warrior)", "", warrior, warrior.arma1, warrior.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
-player5 = new Character(false, "Primrose", "", dancer, dancer.arma1, dancer.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
+player5 = new Character(false, "Primrose (Dancer)", "", dancer, dancer.arma1, dancer.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
-player6 = new Character(false, "Alfyn", "", apothecary, apothecary.arma1, apothecary.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
+player6 = new Character(false, "Alfyn (Apothecary)", "", apothecary, apothecary.arma1, apothecary.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
-player7 = new Character(false, "Therion", "", thief, thief.arma1, thief.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
+player7 = new Character(false, "Therion (Thief)", "", thief, thief.arma1, thief.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
-player8 = new Character(false, "Haanit", "", hunter, hunter.arma1, hunter.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
+player8 = new Character(false, "Haanit (Hunter)", "", hunter, hunter.arma1, hunter.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
 
 client.on('message', message =>{
@@ -175,9 +175,9 @@ client.on('message', message =>{
             message.channel.send(message.author + " Ya cresate un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
         }else{
             newPlayer = player1;
-            newPlayer.personaDiscord = message.author.id;
+            newPlayer.personaDiscord = message.author.username;
             usernamesServidor.push(message.author.username);
-            jugadoresServidor.push(newPlayer.personaDiscord);
+            jugadoresServidor.push(message.author.id);
 
             console.log(newPlayer.nombre);
             console.log(newPlayer.personaDiscord);
@@ -192,9 +192,9 @@ client.on('message', message =>{
             return
         }else{
             newPlayer = player2;
-            newPlayer.personaDiscord = message.author.id;
+            newPlayer.personaDiscord = message.author.username;
             usernamesServidor.push(message.author.username);
-            jugadoresServidor.push(newPlayer.personaDiscord);
+            jugadoresServidor.push(message.author.id);
 
             console.log(newPlayer.nombre);
             console.log(newPlayer.personaDiscord);
@@ -209,9 +209,9 @@ client.on('message', message =>{
             return
         }else{
             newPlayer = player3;
-            newPlayer.personaDiscord = message.author.id;
+            newPlayer.personaDiscord = message.author.username;
             usernamesServidor.push(message.author.username);
-            jugadoresServidor.push(newPlayer.personaDiscord);
+            jugadoresServidor.push(message.author.id);
 
             console.log(newPlayer.nombre);
             console.log(newPlayer.personaDiscord);
@@ -226,9 +226,9 @@ client.on('message', message =>{
             return
         }else{
             newPlayer = player4;
-            newPlayer.personaDiscord = message.author.id;
+            newPlayer.personaDiscord = message.author.username;
             usernamesServidor.push(message.author.username);
-            jugadoresServidor.push(newPlayer.personaDiscord);
+            jugadoresServidor.push(message.author.id);
 
             console.log(newPlayer.nombre);
             console.log(newPlayer.personaDiscord);
@@ -243,9 +243,9 @@ client.on('message', message =>{
             return
         }else{
             newPlayer = player5;
-            newPlayer.personaDiscord = message.author.id;
+            newPlayer.personaDiscord = message.author.username;
             usernamesServidor.push(message.author.username);
-            jugadoresServidor.push(newPlayer.personaDiscord);
+            jugadoresServidor.push(message.author.id);
 
             console.log(newPlayer.nombre);
             console.log(newPlayer.personaDiscord);
@@ -260,9 +260,9 @@ client.on('message', message =>{
             return
         }else{
         newPlayer = player6;
-        newPlayer.personaDiscord = message.author.id;
+        newPlayer.personaDiscord = message.author.username;
         usernamesServidor.push(message.author.username);
-        jugadoresServidor.push(newPlayer.personaDiscord);
+        jugadoresServidor.push(message.author.id);
 
         console.log(newPlayer.nombre);
         console.log(newPlayer.personaDiscord);
@@ -277,9 +277,9 @@ client.on('message', message =>{
             return
         }else{
             newPlayer = player7;
-            newPlayer.personaDiscord = message.author.id;
+            newPlayer.personaDiscord = message.author.username;
             usernamesServidor.push(message.author.username);
-            jugadoresServidor.push(newPlayer.personaDiscord);
+            jugadoresServidor.push(message.author.id);
 
             console.log(newPlayer.nombre);
             console.log(newPlayer.personaDiscord);
@@ -294,9 +294,10 @@ client.on('message', message =>{
             return
         }else{
             newPlayer = player8;
-            newPlayer.personaDiscord = message.author.id;
+            newPlayer.personaDiscord = message.author.username;
             usernamesServidor.push(message.author.username);
-            jugadoresServidor.push(newPlayer.personaDiscord);
+            jugadoresServidor.push(message.author.id);
+
             console.log(newPlayer.nombre);
             console.log(newPlayer.personaDiscord);
             diccionarioJugadores[message.author.id] = newPlayer;
@@ -312,7 +313,7 @@ client.on('message', message =>{
 
     if(message.content === 'my character'){
         if (jugadoresServidor.includes(message.author.id)){
-            message.author.send("Este es tu personaje :V");
+            message.channel.send(`Personaje: ${diccionarioJugadores[message.author.id].nombre}`);
         }
     }
 
