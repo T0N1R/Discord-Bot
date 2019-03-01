@@ -171,66 +171,94 @@ client.on('message', message =>{
         }
 
     if(message.content === 'OCT_Ophilia'){
-        newPlayer = player1;
-        newPlayer.personaDiscord = message.author.id;
-        usernamesServidor.push(message.author.username);
-        jugadoresServidor.push(newPlayer.personaDiscord);
+        if (jugadoresServidor.includes(message.author.id)){
+            message.channel.send(message.author + " Ya cresate un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
+        }else{
+            newPlayer = player1;
+            newPlayer.personaDiscord = message.author.id;
+            usernamesServidor.push(message.author.username);
+            jugadoresServidor.push(newPlayer.personaDiscord);
 
-        console.log(newPlayer.nombre);
-        console.log(newPlayer.personaDiscord);
-        diccionarioJugadores[message.author.id] = newPlayer;
-        message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
+            console.log(newPlayer.nombre);
+            console.log(newPlayer.personaDiscord);
+            diccionarioJugadores[message.author.id] = newPlayer;
+            message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
+        }
     }
 
     if(message.content === 'OCT_Cyrus'){
-        newPlayer = player2;
-        newPlayer.personaDiscord = message.author.id;
-        usernamesServidor.push(message.author.username);
-        jugadoresServidor.push(newPlayer.personaDiscord);
+        if (jugadoresServidor.includes(message.author.id)){
+            message.channel.send(message.author + " Ya create un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
+            return
+        }else{
+            newPlayer = player2;
+            newPlayer.personaDiscord = message.author.id;
+            usernamesServidor.push(message.author.username);
+            jugadoresServidor.push(newPlayer.personaDiscord);
 
-        console.log(newPlayer.nombre);
-        console.log(newPlayer.personaDiscord);
-        diccionarioJugadores[message.author.id] = newPlayer;
-        message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
+            console.log(newPlayer.nombre);
+            console.log(newPlayer.personaDiscord);
+            diccionarioJugadores[message.author.id] = newPlayer;
+            message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
+        }
     }    
 
     if(message.content === 'OCT_Tressa'){
-        newPlayer = player3;
-        newPlayer.personaDiscord = message.author.id;
-        usernamesServidor.push(message.author.username);
-        jugadoresServidor.push(newPlayer.personaDiscord);
+        if (jugadoresServidor.includes(message.author.id)){
+            message.channel.send(message.author + " Ya create un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
+            return
+        }else{
+            newPlayer = player3;
+            newPlayer.personaDiscord = message.author.id;
+            usernamesServidor.push(message.author.username);
+            jugadoresServidor.push(newPlayer.personaDiscord);
 
-        console.log(newPlayer.nombre);
-        console.log(newPlayer.personaDiscord);
-        diccionarioJugadores[message.author.id] = newPlayer;
-        message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
+            console.log(newPlayer.nombre);
+            console.log(newPlayer.personaDiscord);
+            diccionarioJugadores[message.author.id] = newPlayer;
+            message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
+        }
     }
 
     if(message.content === 'OCT_Olberic'){
-        newPlayer = player4;
-        newPlayer.personaDiscord = message.author.id;
-        usernamesServidor.push(message.author.username);
-        jugadoresServidor.push(newPlayer.personaDiscord);
+        if (jugadoresServidor.includes(message.author.id)){
+            message.channel.send(message.author + " Ya create un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
+            return
+        }else{
+            newPlayer = player4;
+            newPlayer.personaDiscord = message.author.id;
+            usernamesServidor.push(message.author.username);
+            jugadoresServidor.push(newPlayer.personaDiscord);
 
-        console.log(newPlayer.nombre);
-        console.log(newPlayer.personaDiscord);
-        diccionarioJugadores[message.author.id] = newPlayer;
-        message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
+            console.log(newPlayer.nombre);
+            console.log(newPlayer.personaDiscord);
+            diccionarioJugadores[message.author.id] = newPlayer;
+            message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
+        }
     }
 
     if(message.content === 'OCT_Primrose'){
-        newPlayer = player5;
-        newPlayer.personaDiscord = message.author.id;
-        usernamesServidor.push(message.author.username);
-        jugadoresServidor.push(newPlayer.personaDiscord);
+        if (jugadoresServidor.includes(message.author.id)){
+            message.channel.send(message.author + " Ya create un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
+            return
+        }else{
+            newPlayer = player5;
+            newPlayer.personaDiscord = message.author.id;
+            usernamesServidor.push(message.author.username);
+            jugadoresServidor.push(newPlayer.personaDiscord);
 
-        console.log(newPlayer.nombre);
-        console.log(newPlayer.personaDiscord);
-        diccionarioJugadores[message.author.id] = newPlayer;
-        message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
+            console.log(newPlayer.nombre);
+            console.log(newPlayer.personaDiscord);
+            diccionarioJugadores[message.author.id] = newPlayer;
+            message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
+        }
     }
 
     if(message.content === 'OCT_Alfyn'){
+        if (jugadoresServidor.includes(message.author.id)){
+            message.channel.send(message.author + " Ya create un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
+            return
+        }else{
         newPlayer = player6;
         newPlayer.personaDiscord = message.author.id;
         usernamesServidor.push(message.author.username);
@@ -240,30 +268,40 @@ client.on('message', message =>{
         console.log(newPlayer.personaDiscord);
         diccionarioJugadores[message.author.id] = newPlayer;
         message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
+        }
     }
 
     if(message.content === 'OCT_Therion'){
-        newPlayer = player7;
-        newPlayer.personaDiscord = message.author.id;
-        usernamesServidor.push(message.author.username);
-        jugadoresServidor.push(newPlayer.personaDiscord);
+        if (jugadoresServidor.includes(message.author.id)){
+            message.channel.send(message.author + " Ya create un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
+            return
+        }else{
+            newPlayer = player7;
+            newPlayer.personaDiscord = message.author.id;
+            usernamesServidor.push(message.author.username);
+            jugadoresServidor.push(newPlayer.personaDiscord);
 
-        console.log(newPlayer.nombre);
-        console.log(newPlayer.personaDiscord);
-        diccionarioJugadores[message.author.id] = newPlayer;
-        message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
+            console.log(newPlayer.nombre);
+            console.log(newPlayer.personaDiscord);
+            diccionarioJugadores[message.author.id] = newPlayer;
+            message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
+        }
     }
 
     if(message.content === 'OCT_Haanit'){
-        newPlayer = player8;
-        newPlayer.personaDiscord = message.author.id;
-        usernamesServidor.push(message.author.username);
-        jugadoresServidor.push(newPlayer.personaDiscord);
-
-        console.log(newPlayer.nombre);
-        console.log(newPlayer.personaDiscord);
-        diccionarioJugadores[message.author.id] = newPlayer;
-        message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
+        if (jugadoresServidor.includes(message.author.id)){
+            message.channel.send(message.author + " Ya create un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
+            return
+        }else{
+            newPlayer = player8;
+            newPlayer.personaDiscord = message.author.id;
+            usernamesServidor.push(message.author.username);
+            jugadoresServidor.push(newPlayer.personaDiscord);
+            console.log(newPlayer.nombre);
+            console.log(newPlayer.personaDiscord);
+            diccionarioJugadores[message.author.id] = newPlayer;
+            message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
+        }
     }
 
     if(message.content === 'activos'){
@@ -274,30 +312,8 @@ client.on('message', message =>{
 
     if(message.content === 'my character'){
         if (jugadoresServidor.includes(message.author.id)){
-            a = diccionarioJugadores[message.author.id].clase.identify;
-            message.channel.send(a);
+            message.author.send("Este es tu personaje :V");
         }
     }
 
 });
-//player1.identify();
-//console.log(player1.nombre);
-//console.log(player1.peleando);
-
-//console.log(player1.nombre);
-//console.log(player1.identify())
-
-/*
-console.log(player1.personaDiscord);
-console.log(player1.clase.special1);
-console.log(player1.clase.special2);
-console.log(player1.clase.special3);
-console.log("-----------------------");
-console.log(player2.nombre);
-console.log(player2.personaDiscord);
-console.log(player2.clase.special7);
-console.log("-----------------------");
-console.log(player2.identify())
-console.log("-----------------------");
-console.log(player2.clase.identify())
-*/

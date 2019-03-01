@@ -1,2 +1,2 @@
 
-        message.channel.send(message.author + a);
+            console.log(newPlayer.personaDiscord);
