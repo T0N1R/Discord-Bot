@@ -36,10 +36,11 @@ function Class(nivel, vida, sp, atk, def, ElemAtk, ElemDef, speed, tipoArma1, ti
 
 }
 
-function Character(peleando, nombre, personaDiscord, clase, arma1, arma2, acc1, acc2, job, jp, oro, lider) {
+function Character(peleando, nombre, personaDiscord, descripcionClase, clase, arma1, arma2, acc1, acc2, job, jp, oro, lider) {
     this.peleando = peleando;
     this.nombre = nombre;
     this.personaDiscord = personaDiscord;
+    this.descripcionClase = descripcionClase;
     this.clase = clase;
     this.arma1 = arma1;
     this.arma2 = arma2;
@@ -86,21 +87,21 @@ thief = new Class(1, 250, 40, 88, 64, 80, 64, 96, "Dagger", "Sword", "Steal", "W
 //Haanit
 hunter = new Class(1, 250, 40, 96, 64, 80, 64, 80, "Bow", "Axe", "Rain of Arrows", "True Strike", "Thunderbird", "Leghold Trap", "Mercy Strike", "Arrowstorm", "Take Aim", "Draefindi's Rage", "Basic atk", "Defend", 1, null);
 
-player1 = new Character(false, "Ophilia (Cleric)", "", cleric, cleric.arma1, cleric.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
+player1 = new Character(false, "Ophilia", "", "Cleric", cleric, cleric.arma1, cleric.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
-player2 = new Character(false, "Cyrus (Scholar)", "", scholar, scholar.arma1, scholar.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
+player2 = new Character(false, "Cyrus", "", "Scholar", scholar, scholar.arma1, scholar.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
-player3 = new Character(false, "Tressa (Merchant)", "", merchant, merchant.arma1, merchant.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
+player3 = new Character(false, "Tressa", "", "Merchant", merchant, merchant.arma1, merchant.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
-player4 = new Character(false, "Olberic (Warrior)", "", warrior, warrior.arma1, warrior.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
+player4 = new Character(false, "Olberic", "", "Warrior", warrior, warrior.arma1, warrior.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
-player5 = new Character(false, "Primrose (Dancer)", "", dancer, dancer.arma1, dancer.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
+player5 = new Character(false, "Primrose", "", " Dancer", dancer, dancer.arma1, dancer.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
-player6 = new Character(false, "Alfyn (Apothecary)", "", apothecary, apothecary.arma1, apothecary.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
+player6 = new Character(false, "Alfyn", "", "Apothecary", apothecary, apothecary.arma1, apothecary.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
-player7 = new Character(false, "Therion (Thief)", "", thief, thief.arma1, thief.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
+player7 = new Character(false, "Therion", "", "Thief", thief, thief.arma1, thief.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
-player8 = new Character(false, "Haanit (Hunter)", "", hunter, hunter.arma1, hunter.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
+player8 = new Character(false, "Haanit", "", "Hunter", hunter, hunter.arma1, hunter.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
 
 client.on('message', message =>{
@@ -129,46 +130,59 @@ client.on('message', message =>{
         message.channel.send("Ingresa el comando para crear tu personaje/clase: ");
         a = 1;
         if (a == 1){
-            message.channel.send("[OCT_Ophilia]: Ophilia (Cleric)", {files: ["C:/Users/Antonio/Documents/Stuff/Octopath Discord/personajes/Ophilia.png"]});
+            message.channel.send("[OCT_Ophilia]: Ophilia (Cleric)", {files: ["C:/Users/Antonio/Documents/Stuff/Discord-Bot-1/Discord-Bot/Octopath Discord/personajes/Ophilia.png"]});
             a += 1;
         
 
             if (a == 2){
-                message.channel.send("[OCT_Cyrus]", {files: ["C:/Users/Antonio/Documents/Stuff/Octopath Discord/personajes/Cyrus.png"]});
+                message.channel.send("[OCT_Cyrus]", {files: ["C:/Users/Antonio/Documents/Stuff/Discord-Bot-1/Discord-Bot/Octopath Discord/personajes/Cyrus.png"]});
                 a += 1;
             }
 
             if (a == 3){
-                message.channel.send("[OCT_Tressa]", {files: ["C:/Users/Antonio/Documents/Stuff/Octopath Discord/personajes/Tressa.png"]});
+                message.channel.send("[OCT_Tressa]", {files: ["C:/Users/Antonio/Documents/Stuff/Discord-Bot-1/Discord-Bot/Octopath Discord/personajes/Tressa.png"]});
                 a += 1;
             }
 
             if (a == 4){
-                message.channel.send("[OCT_Olberic]", {files: ["C:/Users/Antonio/Documents/Stuff/Octopath Discord/personajes/Olberic.png"]});
+                message.channel.send("[OCT_Olberic]", {files: ["C:/Users/Antonio/Documents/Stuff/Discord-Bot-1/Discord-Bot/Octopath Discord/personajes/Olberic.png"]});
                 a += 1;
             }
 
             if (a == 5){
-                message.channel.send("[OCT_Primrose]", {files: ["C:/Users/Antonio/Documents/Stuff/Octopath Discord/personajes/Primrose.png"]});
+                message.channel.send("[OCT_Primrose]", {files: ["C:/Users/Antonio/Documents/Stuff/Discord-Bot-1/Discord-Bot/Octopath Discord/personajes/Primrose.png"]});
                 a += 1;
             }
 
             if (a == 6){
-                message.channel.send("[OCT_Alfyn]", {files: ["C:/Users/Antonio/Documents/Stuff/Octopath Discord/personajes/Alfyn.png"]});
+                message.channel.send("[OCT_Alfyn]", {files: ["C:/Users/Antonio/Documents/Stuff/Discord-Bot-1/Discord-Bot/Octopath Discord/personajes/Alfyn.png"]});
                 a += 1;
             }
 
             if (a == 7){
-                message.channel.send("[OCT_Therion]", {files: ["C:/Users/Antonio/Documents/Stuff/Octopath Discord/personajes/Therion.png"]});
+                message.channel.send("[OCT_Therion]", {files: ["C:/Users/Antonio/Documents/Stuff/Discord-Bot-1/Discord-Bot/Octopath Discord/personajes/Therion.png"]});
                 a += 1;
             }
 
             if (a == 8){
-                message.channel.send("[OCT_Haanit]", {files: ["C:/Users/Antonio/Documents/Stuff/Octopath Discord/personajes/Haanit.png"]});
+                message.channel.send("[OCT_Haanit]", {files: ["C:/Users/Antonio/Documents/Stuff/Discord-Bot-1/Discord-Bot/Octopath Discord/personajes/Haanit.png"]});
                 a += 1;
             }
         }
         }
+
+    if(message.content === 'OCTdelete'){
+        for( var i = 0; i < jugadoresServidor.length-1; i++){ 
+            if ( jugadoresServidor[i] === message.author.id) {
+              arr.splice(i, 1); 
+            }
+         }
+
+        if(message.author in diccionarioJugadores == true){
+            //BUSCAR COMO ELIMINAR LLAVE DEL DICCIONARIO
+            console.log('A')
+        }
+    }
 
     if(message.content === 'OCT_Ophilia'){
         if (jugadoresServidor.includes(message.author.id)){
@@ -313,7 +327,10 @@ client.on('message', message =>{
 
     if(message.content === 'my character'){
         if (jugadoresServidor.includes(message.author.id)){
-            message.channel.send(`Personaje: ${diccionarioJugadores[message.author.id].nombre}`);
+            var personaje = diccionarioJugadores[message.author.id].nombre;
+            message.channel.send({files: ["C:/Users/Antonio/Documents/Stuff/Discord-Bot-1/Discord-Bot/Octopath Discord/personajes/" + personaje +".png"]} + '\n' + `Personaje: ${diccionarioJugadores[message.author.id].nombre} 
+            \nClase: ${diccionarioJugadores[message.author.id].descripcionClase}`
+            );
         }
     }
 
