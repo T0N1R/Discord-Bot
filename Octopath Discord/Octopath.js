@@ -4,7 +4,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-client.login('TOKEN');
+client.login('NTI2NjIyNDg0OTI2MzAwMTYw.DwIMfQ.WTBff8XS8Y2z1jckMRgiiO3XaNI');
 
 function Class(nivel, vida, sp, atk, def, ElemAtk, ElemDef, speed, tipoArma1, tipoArma2, special1, special2, special3, special4, special5, special6, special7, special8, hit, defend, bp, status) {
     this.nivel = nivel;
@@ -55,11 +55,23 @@ function Character(peleando, nombre, personaDiscord, descripcionClase, clase, ar
     }
 }
 
+function Enemy(nombre, vida, escudo, debilidad, oro, jp, ataque1, ataque2, ataque3){
+    this.nombre = nombre;
+    this.vida = vida;
+    this.escudo = escudo;
+    this.debilidad = debilidad;
+    this.oro = oro;
+    this.jp = jp;
+    this.ataque1 = ataque1;
+    this.ataque2 = ataque2;
+    this.ataque3 = ataque3;
+}
+
 //https://docs.google.com/spreadsheets/d/1X-XO1bXJR90wMq3siW22ioERRKzgAUXob_yDpdpM25o/edit#gid=279719304
 
-jugadoresServidor = [];
-usernamesServidor = [];
-let diccionarioJugadores = {};
+
+let diccionarioUsuarios = {1234: ""};
+let diccionarioJugadores = {1234: ""};
 
 party = []
 
@@ -169,164 +181,150 @@ client.on('message', message =>{
                 a += 1;
             }
         }
-        }
+    }
 
     if(message.content === 'OCTdelete'){
-        for( var i = 0; i < jugadoresServidor.length-1; i++){ 
-            if ( jugadoresServidor[i] === message.author.id) {
-              arr.splice(i, 1); 
-            }
-         }
 
-        if(message.author in diccionarioJugadores == true){
-            //BUSCAR COMO ELIMINAR LLAVE DEL DICCIONARIO
-            console.log('A')
+        if(message.author.id in diccionarioUsuarios == true){
+            delete diccionarioUsuarios[message.author.id];
+        }
+
+        if(message.author.id in diccionarioJugadores == true){
+            delete diccionarioJugadores[message.author.id];
         }
     }
 
     if(message.content === 'OCT_Ophilia'){
-        if (jugadoresServidor.includes(message.author.id)){
+        if (message.author.id in diccionarioJugadores == true){
             message.channel.send(message.author + " Ya cresate un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
+
         }else{
             newPlayer = player1;
             newPlayer.personaDiscord = message.author.username;
-            usernamesServidor.push(message.author.username);
-            jugadoresServidor.push(message.author.id);
-
             console.log(newPlayer.nombre);
             console.log(newPlayer.personaDiscord);
             diccionarioJugadores[message.author.id] = newPlayer;
+            diccionarioUsuarios[message.author.id] = message.author.username;
             message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
         }
     }
 
     if(message.content === 'OCT_Cyrus'){
-        if (jugadoresServidor.includes(message.author.id)){
-            message.channel.send(message.author + " Ya create un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
-            return
+        if (message.author.id in diccionarioJugadores == true){
+            message.channel.send(message.author + " Ya cresate un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
+
         }else{
             newPlayer = player2;
             newPlayer.personaDiscord = message.author.username;
-            usernamesServidor.push(message.author.username);
-            jugadoresServidor.push(message.author.id);
-
             console.log(newPlayer.nombre);
             console.log(newPlayer.personaDiscord);
             diccionarioJugadores[message.author.id] = newPlayer;
+            diccionarioUsuarios[message.author.id] = message.author.username;
             message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
         }
     }    
 
     if(message.content === 'OCT_Tressa'){
-        if (jugadoresServidor.includes(message.author.id)){
-            message.channel.send(message.author + " Ya create un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
-            return
+        if (message.author.id in diccionarioJugadores == true){
+            message.channel.send(message.author + " Ya cresate un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
+
         }else{
             newPlayer = player3;
             newPlayer.personaDiscord = message.author.username;
-            usernamesServidor.push(message.author.username);
-            jugadoresServidor.push(message.author.id);
-
             console.log(newPlayer.nombre);
             console.log(newPlayer.personaDiscord);
             diccionarioJugadores[message.author.id] = newPlayer;
+            diccionarioUsuarios[message.author.id] = message.author.username;
             message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
         }
     }
 
     if(message.content === 'OCT_Olberic'){
-        if (jugadoresServidor.includes(message.author.id)){
-            message.channel.send(message.author + " Ya create un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
-            return
+        if (message.author.id in diccionarioJugadores == true){
+            message.channel.send(message.author + " Ya cresate un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
+
         }else{
             newPlayer = player4;
             newPlayer.personaDiscord = message.author.username;
-            usernamesServidor.push(message.author.username);
-            jugadoresServidor.push(message.author.id);
-
             console.log(newPlayer.nombre);
             console.log(newPlayer.personaDiscord);
             diccionarioJugadores[message.author.id] = newPlayer;
+            diccionarioUsuarios[message.author.id] = message.author.username;
             message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
         }
     }
 
     if(message.content === 'OCT_Primrose'){
-        if (jugadoresServidor.includes(message.author.id)){
-            message.channel.send(message.author + " Ya create un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
-            return
+        if (message.author.id in diccionarioJugadores == true){
+            message.channel.send(message.author + " Ya cresate un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
+
         }else{
             newPlayer = player5;
             newPlayer.personaDiscord = message.author.username;
-            usernamesServidor.push(message.author.username);
-            jugadoresServidor.push(message.author.id);
-
             console.log(newPlayer.nombre);
             console.log(newPlayer.personaDiscord);
             diccionarioJugadores[message.author.id] = newPlayer;
+            diccionarioUsuarios[message.author.id] = message.author.username;
             message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
         }
     }
 
     if(message.content === 'OCT_Alfyn'){
-        if (jugadoresServidor.includes(message.author.id)){
-            message.channel.send(message.author + " Ya create un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
-            return
-        }else{
-        newPlayer = player6;
-        newPlayer.personaDiscord = message.author.username;
-        usernamesServidor.push(message.author.username);
-        jugadoresServidor.push(message.author.id);
+        if (message.author.id in diccionarioJugadores == true){
+            message.channel.send(message.author + " Ya cresate un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
 
-        console.log(newPlayer.nombre);
-        console.log(newPlayer.personaDiscord);
-        diccionarioJugadores[message.author.id] = newPlayer;
-        message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
+        }else{
+            newPlayer = player6;
+            newPlayer.personaDiscord = message.author.username;
+            console.log(newPlayer.nombre);
+            console.log(newPlayer.personaDiscord);
+            diccionarioJugadores[message.author.id] = newPlayer;
+            diccionarioUsuarios[message.author.id] = message.author.username;
+            message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
         }
     }
 
     if(message.content === 'OCT_Therion'){
-        if (jugadoresServidor.includes(message.author.id)){
-            message.channel.send(message.author + " Ya create un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
-            return
+        if (message.author.id in diccionarioJugadores == true){
+            message.channel.send(message.author + " Ya cresate un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
+
         }else{
             newPlayer = player7;
             newPlayer.personaDiscord = message.author.username;
-            usernamesServidor.push(message.author.username);
-            jugadoresServidor.push(message.author.id);
-
             console.log(newPlayer.nombre);
             console.log(newPlayer.personaDiscord);
             diccionarioJugadores[message.author.id] = newPlayer;
+            diccionarioUsuarios[message.author.id] = message.author.username;
             message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
         }
     }
 
     if(message.content === 'OCT_Haanit'){
-        if (jugadoresServidor.includes(message.author.id)){
-            message.channel.send(message.author + " Ya create un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
-            return
+        if (message.author.id in diccionarioJugadores == true){
+            message.channel.send(message.author + " Ya cresate un personaje, elige [OCTdelete] para borrar tu antiguo personaje");
+
         }else{
             newPlayer = player8;
             newPlayer.personaDiscord = message.author.username;
-            usernamesServidor.push(message.author.username);
-            jugadoresServidor.push(message.author.id);
-
             console.log(newPlayer.nombre);
             console.log(newPlayer.personaDiscord);
             diccionarioJugadores[message.author.id] = newPlayer;
+            diccionarioUsuarios[message.author.id] = message.author.username;
             message.channel.send(message.author + '\n' + "Has elegido a " + newPlayer.nombre);
         }
     }
 
     if(message.content === 'activos'){
-        a = usernamesServidor;
-        message.channel.send(message.author + " Activos: "+ '\n' + a);
+        let a = []
+        for (var key in diccionarioUsuarios){
+            a.push(diccionarioUsuarios[key])
+        }
+        message.channel.send(message.author + " Activos: " + '\n' + a);
         console.log(diccionarioJugadores);
     }
 
     if(message.content === 'my character'){
-        if (jugadoresServidor.includes(message.author.id)){
+        if (message.author.id in diccionarioJugadores == true){
             var personaje = diccionarioJugadores[message.author.id].nombre;
             message.channel.send({files: ["C:/Users/Antonio/Documents/Stuff/Discord-Bot-1/Discord-Bot/Octopath Discord/personajes/" + personaje +".png"]} + '\n' + `Personaje: ${diccionarioJugadores[message.author.id].nombre} 
             \nClase: ${diccionarioJugadores[message.author.id].descripcionClase}`
