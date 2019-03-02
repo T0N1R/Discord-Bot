@@ -67,13 +67,15 @@ function Enemy(nombre, vida, escudo, debilidad, oro, jp, ataque1, ataque2, ataqu
     this.ataque3 = ataque3;
 }
 
+var timer = function (){
+    console.log("pasaron 30 segundos");
+    }
+
 //https://docs.google.com/spreadsheets/d/1X-XO1bXJR90wMq3siW22ioERRKzgAUXob_yDpdpM25o/edit#gid=279719304
 
 
 let diccionarioUsuarios = {1234: ""};
 let diccionarioJugadores = {1234: ""};
-
-party = []
 
 //Ophilia
 cleric = new Class(1, 225, 65, 80, 80, 96, 104, 64, "Staff", null, "Heal Wounds", "Holy Light", "Sherlering Veil", "Luminescence", "Heal More", "Reflective Veil", "Revive", "Aelfric's Auspices", "Basic atk", "Defend", 1, null);
@@ -98,6 +100,11 @@ thief = new Class(1, 250, 40, 88, 64, 80, 64, 96, "Dagger", "Sword", "Steal", "W
 
 //Haanit
 hunter = new Class(1, 250, 40, 96, 64, 80, 64, 80, "Bow", "Axe", "Rain of Arrows", "True Strike", "Thunderbird", "Leghold Trap", "Mercy Strike", "Arrowstorm", "Take Aim", "Draefindi's Rage", "Basic atk", "Defend", 1, null);
+
+oponente = false;
+enemy1 = new Enemy("Steorra", 178064, 7, ["Sword", "Dagger", "Fire", "Ice", "Rod"], 20000, 1200, 100, 200, 150);
+party = [];
+var enemigo;
 
 player1 = new Character(false, "Ophilia", "", "Cleric", cleric, cleric.arma1, cleric.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
@@ -330,6 +337,22 @@ client.on('message', message =>{
             \nClase: ${diccionarioJugadores[message.author.id].descripcionClase}`
             );
         }
+    }
+
+    if(message.content === 'battle'){
+        if(oponente === false){
+            enemigo = enemy1;
+            oponente = true;
+            message.channel.send(message.author + " La pelea va a iniciar, ingresa join en 2 minutos");
+            setTimeout(timer, 30000);
+        }else{
+            message.channel.send(message.author + " Ya hay una pelea en progreso");
+        }
+
+    }
+
+    if (message.content === 'join'){
+
     }
 
 });
