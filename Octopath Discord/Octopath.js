@@ -4,7 +4,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-client.login('NTI2NjIyNDg0OTI2MzAwMTYw.DwIMfQ.WTBff8XS8Y2z1jckMRgiiO3XaNI');
+client.login('');
 
 function Class(nivel, vida, sp, atk, def, ElemAtk, ElemDef, speed, tipoArma1, tipoArma2, special1, special2, special3, special4, special5, special6, special7, special8, hit, defend, bp, status) {
     this.nivel = nivel;
