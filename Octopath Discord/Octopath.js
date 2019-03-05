@@ -4,7 +4,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-client.login('');
+client.login('TOKEN');
 
 function Class(nivel, vida, sp, atk, def, ElemAtk, ElemDef, speed, tipoArma1, tipoArma2, special1, special2, special3, special4, special5, special6, special7, special8, hit, defend, bp, status) {
     this.nivel = nivel;
@@ -67,15 +67,21 @@ function Enemy(nombre, vida, escudo, debilidad, oro, jp, ataque1, ataque2, ataqu
     this.ataque3 = ataque3;
 }
 
-var timer = function (){
-    console.log("pasaron 30 segundos");
-    }
-
-//https://docs.google.com/spreadsheets/d/1X-XO1bXJR90wMq3siW22ioERRKzgAUXob_yDpdpM25o/edit#gid=279719304
-
-
+var canal;
 let diccionarioUsuarios = {1234: ""};
 let diccionarioJugadores = {1234: ""};
+
+var timer = function (){
+    console.log("pasaron 30 segundos");
+    canal.send("ya pasaron 30 segundos");
+    }
+
+function statusEnemy(){
+    canal.send(enemy1.nombre,{files: ["C:/Users/Antonio/Documents/Stuff/Discord-Bot-1/Discord-Bot/Octopath Discord/enemigos/Steorra.gif"]});
+    canal.send("Vida: " + enemy1.vida);
+}
+
+//https://docs.google.com/spreadsheets/d/1X-XO1bXJR90wMq3siW22ioERRKzgAUXob_yDpdpM25o/edit#gid=279719304
 
 //Ophilia
 cleric = new Class(1, 225, 65, 80, 80, 96, 104, 64, "Staff", null, "Heal Wounds", "Holy Light", "Sherlering Veil", "Luminescence", "Heal More", "Reflective Veil", "Revive", "Aelfric's Auspices", "Basic atk", "Defend", 1, null);
@@ -102,7 +108,8 @@ thief = new Class(1, 250, 40, 88, 64, 80, 64, 96, "Dagger", "Sword", "Steal", "W
 hunter = new Class(1, 250, 40, 96, 64, 80, 64, 80, "Bow", "Axe", "Rain of Arrows", "True Strike", "Thunderbird", "Leghold Trap", "Mercy Strike", "Arrowstorm", "Take Aim", "Draefindi's Rage", "Basic atk", "Defend", 1, null);
 
 oponente = false;
-enemy1 = new Enemy("Steorra", 178064, 7, ["Sword", "Dagger", "Fire", "Ice", "Rod"], 20000, 1200, 100, 200, 150);
+//178064
+enemy1 = new Enemy("Steorra", 200, 7, ["Sword", "Dagger", "Fire", "Ice", "Rod"], 20000, 1200, 100, 200, 150);
 party = [];
 var enemigo;
 
@@ -343,7 +350,8 @@ client.on('message', message =>{
         if(oponente === false){
             enemigo = enemy1;
             oponente = true;
-            message.channel.send(message.author + " La pelea va a iniciar, ingresa join en 2 minutos");
+            message.channel.send(message.author + " La pelea va a iniciar, ingresa join en 30 segundos");
+            canal = message.channel;
             setTimeout(timer, 30000);
         }else{
             message.channel.send(message.author + " Ya hay una pelea en progreso");
@@ -351,8 +359,18 @@ client.on('message', message =>{
 
     }
 
-    if (message.content === 'join'){
+    if (message.content === 'enemy'){
+        canal = message.channel;
+        statusEnemy();
+    }
 
+    if (message.content === 'attack'){
+        if (enemy1.vida > 0 && message.author.id in diccionarioJugadores == true){
+            enemy1.vida = enemy1.vida - diccionarioJugadores[message.author.id].clase.atk;
+            message.channel.send(enemy1.nombre + " acaba de recibir " + diccionarioJugadores[message.author.id].clase.atk + " de daño" + '\n' + "Vida: " + enemy1.vida);
+        }else{
+            message.channel.send(enemy1.nombre + "Fue derrotado");
+        }
     }
 
 });
