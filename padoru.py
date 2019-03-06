@@ -13,31 +13,15 @@ from discord.ext.commands import Bot
 from discord.ext import commands
 
 # cuenta de reddit
-reddit = praw.Reddit(client_id='INGRESAR ID',
-                         client_secret='INGRESAR SECRETO',
-                         password='INGRESAR CONTRASEÑA',
-                         user_agent='USER_AGENT',
-                         username='USERNAME')
+reddit = praw.Reddit(client_id='',
+                     client_secret='',
+                     password='',
+                     user_agent='',
+                     username='')
 
-# lista de urls de Animemes
-lista_Animeme = []
 
-# lista de url de Prequelmemes
-lista_Prequel = []
-
-# lista de url de Dankmemes
-lista_dank = []
-
-# lista de url sakura
-lista_sakura = []
-
-# lista url bestgirl
-lista_bestgirl = []
-
-# lista url Padoru
-lista_Padoru = []
-
-lista_pewds = []
+# lista de urls
+lista_memes = []
 
 
 def get_meme(sitio):
@@ -54,7 +38,7 @@ def get_meme(sitio):
     return lista
 
 
-token = 'NTI2NjIyNDg0OTI2MzAwMTYw.DwIMfQ.WTBff8XS8Y2z1jckMRgiiO3XaNI'
+token = ''
 
 bot = commands.Bot(command_prefix='.')
 
@@ -103,10 +87,10 @@ async def tgs(ctx):
 
 @bot.command()
 async def animemes(ctx):
-    lista_Animeme = get_meme('Animemes')
+    lista_memes = get_meme('Animemes')
     num = random.randint(0, 99)
 
-    await ctx.send(lista_Animeme[num])
+    await ctx.send(lista_memes[num])
 
 # .padoru
 # respuesta: Padorus
@@ -114,10 +98,10 @@ async def animemes(ctx):
 
 @bot.command()
 async def padoru(ctx):
-    lista_Padoru = get_meme('Padoru')
+    lista_memes = get_meme('Padoru')
     num = random.randint(0, 30)
 
-    await ctx.send(lista_Padoru[num])
+    await ctx.send(lista_memes[num])
 
 # .bestgirl
 # respuesta: meme de Tohsaka
@@ -125,10 +109,10 @@ async def padoru(ctx):
 
 @bot.command()
 async def bestgirl(ctx):
-    lista_bestgirl = get_meme('OneTrueTohsaka')
+    lista_memes = get_meme('OneTrueTohsaka')
     num = random.randint(0, 99)
 
-    await ctx.send(lista_bestgirl[num])
+    await ctx.send(lista_memes[num])
 
 # .sakura
 # respuesta: fotos de sakura
@@ -136,10 +120,10 @@ async def bestgirl(ctx):
 
 @bot.command()
 async def sakura(ctx):
-    lista_sakura = get_meme('SakuraMatou')
+    lista_memes = get_meme('SakuraMatou')
     num = random.randint(0, 99)
 
-    await ctx.send(lista_sakura[num])
+    await ctx.send(lista_memes[num])
 
 # .dank
 # respuesta: memes de dankmemes
@@ -147,10 +131,10 @@ async def sakura(ctx):
 
 @bot.command()
 async def dank(ctx):
-    lista_dank = get_meme('dankmemes')
+    lista_memes = get_meme('dankmemes')
     num = random.randint(0, 99)
 
-    await ctx.send(lista_dank[num])
+    await ctx.send(lista_memes[num])
 
 # .prequel
 # respeusta: memes de Prequelmemes
@@ -158,10 +142,10 @@ async def dank(ctx):
 
 @bot.command()
 async def prequel(ctx):
-    lista_Prequel = get_meme('Prequelmemes')
+    lista_memes = get_meme('Prequelmemes')
     num = random.randint(0, 99)
 
-    await ctx.send(lista_Prequel[num])
+    await ctx.send(lista_memes[num])
 
 # .fumino
 #
@@ -177,10 +161,10 @@ async def uruka(ctx):
 
 @bot.command()
 async def pewds(ctx):
-    lista_pewds = get_meme('PewdiepieSubmissions')
+    lista_memes = get_meme('PewdiepieSubmissions')
     num = random.randint(0, 99)
 
-    await ctx.send(lista_pewds[num])
+    await ctx.send(lista_memes[num])
 
 # .lista
 # repuesta: lista de comandos
