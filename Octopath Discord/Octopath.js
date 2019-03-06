@@ -70,10 +70,13 @@ function Enemy(nombre, vida, escudo, debilidad, oro, jp, ataque1, ataque2, ataqu
 var canal;
 let diccionarioUsuarios = {1234: ""};
 let diccionarioJugadores = {1234: ""};
+let peleadores = [];
+
 
 var timer = function (){
     console.log("pasaron 30 segundos");
     canal.send("ya pasaron 30 segundos");
+    oponente = true;
     }
 
 function statusEnemy(){
@@ -110,9 +113,9 @@ hunter = new Class(1, 250, 40, 96, 64, 80, 64, 80, "Bow", "Axe", "Rain of Arrows
 oponente = false;
 //178064
 enemy1 = new Enemy("Steorra", 200, 7, ["Sword", "Dagger", "Fire", "Ice", "Rod"], 20000, 1200, 100, 200, 150);
-party = [];
-var enemigo;
 
+
+var enemigo;
 
 player1 = new Character(false, "Ophilia", "", "Cleric", cleric, cleric.arma1, cleric.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
@@ -351,7 +354,6 @@ client.on('message', message =>{
     if(message.content === 'battle'){
         if(oponente === false){
             enemigo = enemy1;
-            oponente = true;
             message.channel.send(message.author + " La pelea va a iniciar, ingresa join en 30 segundos");
             canal = message.channel;
             setTimeout(timer, 30000);
@@ -368,11 +370,30 @@ client.on('message', message =>{
 
     if (message.content === 'attack'){
         if (enemy1.vida > 0 && message.author.id in diccionarioJugadores == true && oponente === true){
-            enemy1.vida = enemy1.vida - diccionarioJugadores[message.author.id].clase.atk;
-            message.channel.send(enemy1.nombre + " acaba de recibir " + diccionarioJugadores[message.author.id].clase.atk + " de daño" + '\n' + "Vida: " + enemy1.vida);
+            if ((enemy1.vida - diccionarioJugadores[message.author.id].clase.atk) < 0){
+                message.channel.send(enemy1.nombre + "Ha sido derrotado!!!!!!");
+                enemy1.vida = enemy1.vida - diccionarioJugadores[message.author.id].clase.atk;
+            }else{
+                enemy1.vida = enemy1.vida - diccionarioJugadores[message.author.id].clase.atk;
+                message.channel.send(enemy1.nombre + " acaba de recibir " + diccionarioJugadores[message.author.id].clase.atk + " de daño" + '\n' + "Vida: " + enemy1.vida);
+
+            }
+            
         }else{
-            message.channel.send(enemy1.nombre + "No se puedes realizar esta acción");
+            message.channel.send("No se puedes realizar esta acción");
         }
+    }
+
+    if (message.content == 'join'){
+        if (message.author.id in peleadores == false && oponente === false){
+            peleadores.push(message.author.id);
+            message.channel.send("entraste a la party");
+        }else{
+            message.channel.send("ya no puedes entrar a la batalla");
+        }
+    }
+
+    if (message.content == 'party'){
     }
 
 });
