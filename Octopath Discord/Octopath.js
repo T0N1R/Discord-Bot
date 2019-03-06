@@ -4,7 +4,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-client.login('TOKEN');
+client.login('');
 
 function Class(nivel, vida, sp, atk, def, ElemAtk, ElemDef, speed, tipoArma1, tipoArma2, special1, special2, special3, special4, special5, special6, special7, special8, hit, defend, bp, status) {
     this.nivel = nivel;
@@ -112,6 +112,7 @@ oponente = false;
 enemy1 = new Enemy("Steorra", 200, 7, ["Sword", "Dagger", "Fire", "Ice", "Rod"], 20000, 1200, 100, 200, 150);
 party = [];
 var enemigo;
+
 
 player1 = new Character(false, "Ophilia", "", "Cleric", cleric, cleric.arma1, cleric.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
@@ -340,8 +341,9 @@ client.on('message', message =>{
     if(message.content === 'my character'){
         if (message.author.id in diccionarioJugadores == true){
             var personaje = diccionarioJugadores[message.author.id].nombre;
-            message.channel.send({files: ["C:/Users/Antonio/Documents/Stuff/Discord-Bot-1/Discord-Bot/Octopath Discord/personajes/" + personaje +".png"]} + '\n' + `Personaje: ${diccionarioJugadores[message.author.id].nombre} 
-            \nClase: ${diccionarioJugadores[message.author.id].descripcionClase}`
+            message.author.send("", {files: ["C:/Users/Antonio/Documents/Stuff/Discord-Bot-1/Discord-Bot/Octopath Discord/personajes/" + personaje +".png"]});
+            message.author.send(`Personaje: ${diccionarioJugadores[message.author.id].nombre} 
+            \nClase: ${diccionarioJugadores[message.author.id].descripcionClase} \nVida: ${diccionarioJugadores[message.author.id].clase.vida}`
             );
         }
     }
@@ -365,11 +367,11 @@ client.on('message', message =>{
     }
 
     if (message.content === 'attack'){
-        if (enemy1.vida > 0 && message.author.id in diccionarioJugadores == true){
+        if (enemy1.vida > 0 && message.author.id in diccionarioJugadores == true && oponente === true){
             enemy1.vida = enemy1.vida - diccionarioJugadores[message.author.id].clase.atk;
             message.channel.send(enemy1.nombre + " acaba de recibir " + diccionarioJugadores[message.author.id].clase.atk + " de daño" + '\n' + "Vida: " + enemy1.vida);
         }else{
-            message.channel.send(enemy1.nombre + "Fue derrotado");
+            message.channel.send(enemy1.nombre + "No se puedes realizar esta acción");
         }
     }
 
