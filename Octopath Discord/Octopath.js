@@ -385,7 +385,7 @@ client.on('message', message =>{
     }
 
     if (message.content == 'join'){
-        if (message.author.id in peleadores == false && oponente === false){
+        if (message.author.id in peleadores == false && oponente === false && peleadores.includes(message.author.id) == false){
             peleadores.push(message.author.id);
             message.channel.send("entraste a la party");
         }else{
@@ -394,6 +394,9 @@ client.on('message', message =>{
     }
 
     if (message.content == 'party'){
+        for (x = 0; x < peleadores.length; x++){
+            message.channel.send(diccionarioUsuarios[peleadores[x]] + ": " + diccionarioJugadores[peleadores[x]].clase.vida);
+        }
     }
 
 });
