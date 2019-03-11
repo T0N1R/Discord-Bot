@@ -71,18 +71,9 @@ var canal;
 let diccionarioUsuarios = {1234: ""};
 let diccionarioJugadores = {1234: ""};
 let peleadores = [];
+var enemigo;
 
 
-var timer = function (){
-    console.log("pasaron 30 segundos");
-    canal.send("ya pasaron 30 segundos");
-    oponente = true;
-    }
-
-function statusEnemy(){
-    canal.send(enemy1.nombre,{files: ["C:/Users/Antonio/Documents/Stuff/Discord-Bot-1/Discord-Bot/Octopath Discord/enemigos/Steorra.gif"]});
-    canal.send("Vida: " + enemy1.vida);
-}
 
 //https://docs.google.com/spreadsheets/d/1X-XO1bXJR90wMq3siW22ioERRKzgAUXob_yDpdpM25o/edit#gid=279719304
 
@@ -115,8 +106,6 @@ oponente = false;
 enemy1 = new Enemy("Steorra", 200, 7, ["Sword", "Dagger", "Fire", "Ice", "Rod"], 20000, 1200, 100, 200, 150);
 
 
-var enemigo;
-
 player1 = new Character(false, "Ophilia", "", "Cleric", cleric, cleric.arma1, cleric.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
 player2 = new Character(false, "Cyrus", "", "Scholar", scholar, scholar.arma1, scholar.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
@@ -133,6 +122,26 @@ player7 = new Character(false, "Therion", "", "Thief", thief, thief.arma1, thief
 
 player8 = new Character(false, "Haanit", "", "Hunter", hunter, hunter.arma1, hunter.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
 
+
+var timer = function (){
+    console.log("pasaron 30 segundos");
+    canal.send("ya pasaron 30 segundos");
+    oponente = true;
+    }
+
+function statusEnemy(){
+    canal.send("Nombre: " + enemigo.nombre);
+    canal.send("Vida: " + enemigo.vida);
+    canal.send({files: ["C:/Users/Antonio/Documents/Stuff/Discord-Bot-1/Discord-Bot/Octopath Discord/enemigos/Steorra.gif"]});
+    
+}
+
+function enemyAtk(){
+}
+
+function enemyTimer(){
+
+}
 
 client.on('message', message =>{
     if(message.content === 'traveller'){
@@ -395,7 +404,7 @@ client.on('message', message =>{
 
     if (message.content == 'party'){
         for (x = 0; x < peleadores.length; x++){
-            message.channel.send(diccionarioUsuarios[peleadores[x]] + ": " + diccionarioJugadores[peleadores[x]].clase.vida);
+            message.channel.send(diccionarioUsuarios[peleadores[x]] + " | Vida: " + diccionarioJugadores[peleadores[x]].clase.vida);
         }
     }
 
