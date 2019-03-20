@@ -20,6 +20,7 @@ reddit = praw.Reddit(client_id='',
                      username='')
 
 
+
 # lista de urls
 lista_memes = []
 
@@ -144,6 +145,16 @@ async def dank(ctx):
 async def prequel(ctx):
     lista_memes = get_meme('Prequelmemes')
     num = random.randint(0, 99)
+
+    await ctx.send(lista_memes[num])
+
+# .programmer
+# respeusta: memes de ProgramerHumor
+
+@bot.command()
+async def programmer(ctx):
+    lista_memes = get_meme('ProgrammerHumor')
+    num = random.randint(0,99)
 
     await ctx.send(lista_memes[num])
 

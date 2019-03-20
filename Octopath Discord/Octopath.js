@@ -129,6 +129,14 @@ var timer = function (){
     oponente = true;
     }
 
+function wait(ms){
+    var start = new Date().getTime();
+    var end = Object.assign(start + ms);
+    while(start < end) {
+        start = new Date().getTime();
+       }
+     }
+
 function statusEnemy(){
     canal.send("Nombre: " + enemigo.nombre);
     canal.send("Vida: " + enemigo.vida);
@@ -136,12 +144,31 @@ function statusEnemy(){
     
 }
 
+
 function enemyAtk(){
+    contador = 6;
+    while(contador>0){
+        for (x = 0; x < peleadores.length; x++){
+            num = Math.round(Math.random());
+            console.log(num);
+            if(num == 0){
+                diccionarioJugadores[peleadores[x]].clase.vida = diccionarioJugadores[peleadores[x]].clase.vida - 100
+                canal.send(diccionarioUsuarios[peleadores[x]] + " has recibido 100 de daño"  );
+                console.log('ATAQUE');
+                wait(5000);
+
+            }else{
+                canal.send("El enemigo ataca pero esquivaste el ataque");
+                console.log('ESQUIVADO');
+                wait(5000);
+
+            }
+        }
+        contador = contador - 1;
+    }
+    
 }
 
-function enemyTimer(){
-
-}
 
 client.on('message', message =>{
     if(message.content === 'traveller'){
@@ -365,7 +392,11 @@ client.on('message', message =>{
             enemigo = enemy1;
             message.channel.send(message.author + " La pelea va a iniciar, ingresa join en 30 segundos");
             canal = message.channel;
-            setTimeout(timer, 30000);
+            setTimeout(timer, 30000);        
+            setTimeout(enemyAtk, 40000);
+            
+            
+            
         }else{
             message.channel.send(message.author + " Ya hay una pelea en progreso");
         }
