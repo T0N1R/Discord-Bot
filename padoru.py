@@ -158,6 +158,17 @@ async def programmer(ctx):
 
     await ctx.send(lista_memes[num])
 
+# .animemes
+# respuesta: meme de Animemes
+
+
+@bot.command()
+async def jojo(ctx):
+    lista_memes = get_meme('ShitPostCrusaders')
+    num = random.randint(0, 99)
+
+    await ctx.send(lista_memes[num])
+
 # .fumino
 #
 @bot.command()

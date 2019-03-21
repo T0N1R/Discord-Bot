@@ -71,7 +71,7 @@ var canal;
 let diccionarioUsuarios = {1234: ""};
 let diccionarioJugadores = {1234: ""};
 let peleadores = [];
-var enemigo;
+enemigo = [];
 
 
 
@@ -101,9 +101,13 @@ thief = new Class(1, 250, 40, 88, 64, 80, 64, 96, "Dagger", "Sword", "Steal", "W
 //Haanit
 hunter = new Class(1, 250, 40, 96, 64, 80, 64, 80, "Bow", "Axe", "Rain of Arrows", "True Strike", "Thunderbird", "Leghold Trap", "Mercy Strike", "Arrowstorm", "Take Aim", "Draefindi's Rage", "Basic atk", "Defend", 1, null);
 
+//oponente es falso
 oponente = false;
 //178064
+
 enemy1 = new Enemy("Steorra", 200, 7, ["Sword", "Dagger", "Fire", "Ice", "Rod"], 20000, 1200, 100, 200, 150);
+enemy2 = new Enemy("Balogar", 500, 7, ["Sword", "Dagger", "Fire", "Ice", "Rod"], 20000, 1200, 100, 200, 150);
+
 
 
 player1 = new Character(false, "Ophilia", "", "Cleric", cleric, cleric.arma1, cleric.arma2, "accesorio1", "accesorio2", null, 100, 1000, false);
@@ -126,6 +130,7 @@ player8 = new Character(false, "Haanit", "", "Hunter", hunter, hunter.arma1, hun
 var timer = function (){
     console.log("pasaron 30 segundos");
     canal.send("ya pasaron 30 segundos");
+    canal.send("enemy");
     oponente = true;
     }
 
@@ -140,49 +145,32 @@ function wait(ms){
 function statusEnemy(){
     canal.send("Nombre: " + enemigo.nombre);
     canal.send("Vida: " + enemigo.vida);
-    canal.send({files: ["C:/Users/Antonio/Documents/Stuff/Discord-Bot-1/Discord-Bot/Octopath Discord/enemigos/Steorra.gif"]});
+    canal.send({files: ["C:/Users/Antonio/Documents/Stuff/Discord-Bot-1/Discord-Bot/Octopath Discord/enemigos/" + enemigo.nombre + ".gif"]});
     
 }
 
+var ataqueT = function (nombre){
+    canal.send(nombre + " has recibido 100 de daño"  );
+}
 
-function enemyAtk(){
-    contador = 6;
-    while(contador>0){
-        for (x = 0; x < peleadores.length; x++){
-            num = Math.round(Math.random());
-            console.log(num);
-            if(num == 0){
-                diccionarioJugadores[peleadores[x]].clase.vida = diccionarioJugadores[peleadores[x]].clase.vida - 100
-                canal.send(diccionarioUsuarios[peleadores[x]] + " has recibido 100 de daño"  );
-                console.log('ATAQUE');
-                wait(5000);
+var esquivado = function (nombre){
+    canal.send("El enemigo ataca a " + nombre + " pero esquiva el ataque");
+}
 
-            }else{
-                canal.send("El enemigo ataca pero esquivaste el ataque");
-                console.log('ESQUIVADO');
-                wait(5000);
+function ataqueEnemigo1(id){
+    diccionarioJugadores[id].clase.vida = diccionarioJugadores[id].clase.vida - 100;
+}
 
-            }
-        }
-        contador = contador - 1;
-    }
-    
+function ataqueEnemigo2(){
+    diccionarioJugadores[id].clase.vida = diccionarioJugadores[id].clase.vida - 150;
+}
+
+function ataqueEnemigo3(){
+    diccionarioJugadores[id].clase.vida = diccionarioJugadores[id].clase.vida - 50;
 }
 
 
 client.on('message', message =>{
-    if(message.content === 'traveller'){
-        message.channel.send("Selecciona a tu traveller:" + "\n" +
-        "OCT1: Cleric" + "\n" + 
-        "OCT2: Scolar" + "\n" + 
-        "OCT3: Merchant" + "\n" +
-        "OCT4: Warrior" + "\n" + 
-        "OCT5: Dancer" + "\n" + 
-        "OCT6: Apothecary" + "\n" +
-        "OCT7: Thief" + "\n" +
-        "OCT8: Hunter" + "\n"
-        )
-    }
 
     if(message.content === 'game'){
         console.log(message.author.id)
@@ -243,9 +231,6 @@ client.on('message', message =>{
             delete diccionarioUsuarios[message.author.id];
         }
 
-        if(message.author.id in diccionarioJugadores == true){
-            delete diccionarioJugadores[message.author.id];
-        }
     }
 
     if(message.content === 'OCT_Ophilia'){
@@ -382,19 +367,29 @@ client.on('message', message =>{
             var personaje = diccionarioJugadores[message.author.id].nombre;
             message.author.send("", {files: ["C:/Users/Antonio/Documents/Stuff/Discord-Bot-1/Discord-Bot/Octopath Discord/personajes/" + personaje +".png"]});
             message.author.send(`Personaje: ${diccionarioJugadores[message.author.id].nombre} 
-            \nClase: ${diccionarioJugadores[message.author.id].descripcionClase} \nVida: ${diccionarioJugadores[message.author.id].clase.vida}`
+            \nClase: ${diccionarioJugadores[message.author.id].descripcionClase}
+            \nNivel: ${diccionarioJugadores[message.author.id].nivel} 
+            \nVida: ${diccionarioJugadores[message.author.id].clase.vida}
+            \nAtaque: ${diccionarioJugadores[message.author.id].clase.atk}
+            \nDefensa: ${diccionarioJugadores[message.author.id].clase.def}`
             );
         }
     }
 
     if(message.content === 'battle'){
         if(oponente === false){
-            enemigo = enemy1;
+            num = Math.round(Math.random());
+            if (num == 0){
+                enemigo = Object.assign(enemy1);
+            }
+
+            if (num == 1){
+                enemigo = Object.assign(enemy2);
+            }
+            
             message.channel.send(message.author + " La pelea va a iniciar, ingresa join en 30 segundos");
             canal = message.channel;
-            setTimeout(timer, 30000);        
-            setTimeout(enemyAtk, 40000);
-            
+            setTimeout(timer, 30000);    
             
             
         }else{
@@ -409,27 +404,39 @@ client.on('message', message =>{
     }
 
     if (message.content === 'attack'){
-        if (enemy1.vida > 0 && message.author.id in diccionarioJugadores == true && oponente === true){
-            if ((enemy1.vida - diccionarioJugadores[message.author.id].clase.atk) < 0){
-                message.channel.send(enemy1.nombre + "Ha sido derrotado!!!!!!");
-                enemy1.vida = enemy1.vida - diccionarioJugadores[message.author.id].clase.atk;
+        if (enemigo.vida > 0 && message.author.id in diccionarioJugadores == true && oponente === true){
+            if ((enemigo.vida - diccionarioJugadores[message.author.id].clase.atk) < 0){
+                message.channel.send(enemigo.nombre + " Ha sido derrotado!!!!!!");
+                oponente = false;
+                enemigo = [];
+                
             }else{
-                enemy1.vida = enemy1.vida - diccionarioJugadores[message.author.id].clase.atk;
-                message.channel.send(enemy1.nombre + " acaba de recibir " + diccionarioJugadores[message.author.id].clase.atk + " de daño" + '\n' + "Vida: " + enemy1.vida);
+                enemigo.vida = enemigo.vida - diccionarioJugadores[message.author.id].clase.atk;
+                message.channel.send(enemigo.nombre + " acaba de recibir " + diccionarioJugadores[message.author.id].clase.atk + " de daño" + '\n' + "Vida: " + enemigo.vida);
+                
+                num = Math.round(Math.random());
+                if (num == 0){
+                    ataqueEnemigo1(message.author.id);
+                    canal.send(message.author + " has recibido 100 de daño"  );
+                }
+
+                if (num == 1){
+                    canal.send(message.author + ". El enemigo ataca pero esquivaste el ataque");
+                }
 
             }
             
         }else{
-            message.channel.send("No se puedes realizar esta acción");
+            message.channel.send(message.author + ". No se puedes realizar esta acción");
         }
     }
 
     if (message.content == 'join'){
         if (message.author.id in peleadores == false && oponente === false && peleadores.includes(message.author.id) == false){
             peleadores.push(message.author.id);
-            message.channel.send("entraste a la party");
+            message.channel.send(message.author + ". Entraste a la party");
         }else{
-            message.channel.send("ya no puedes entrar a la batalla");
+            message.channel.send(message.author + ". Ya no puedes entrar a la batalla");
         }
     }
 
