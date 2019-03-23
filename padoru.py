@@ -49,14 +49,7 @@ bot = commands.Bot(command_prefix='.')
 async def on_ready():
     print('bot corre')
 
-'''
-@bot.event
-async def on_message(message):
-    autor = str(message.author)
-    contenido = message.content
 
-    print(autor + ': ' + contenido)
-'''
 
 # .ping
 #respuesta: pong

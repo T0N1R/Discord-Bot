@@ -134,13 +134,10 @@ var timer = function (){
     oponente = true;
     }
 
-function wait(ms){
-    var start = new Date().getTime();
-    var end = Object.assign(start + ms);
-    while(start < end) {
-        start = new Date().getTime();
-       }
-     }
+function recuperarVida(){
+    enemy1.vida = 200;
+    enemy2.vida = 500;
+}
 
 function statusEnemy(){
     canal.send("Nombre: " + enemigo.nombre);
@@ -380,10 +377,14 @@ client.on('message', message =>{
         if(oponente === false){
             num = Math.round(Math.random());
             if (num == 0){
+                recuperarVida();
                 enemigo = Object.assign(enemy1);
+                
+                
             }
 
             if (num == 1){
+                recuperarVida();
                 enemigo = Object.assign(enemy2);
             }
             
@@ -408,7 +409,7 @@ client.on('message', message =>{
             if ((enemigo.vida - diccionarioJugadores[message.author.id].clase.atk) < 0){
                 message.channel.send(enemigo.nombre + " Ha sido derrotado!!!!!!");
                 oponente = false;
-                enemigo = [];
+                delete enemigo;
                 
             }else{
                 enemigo.vida = enemigo.vida - diccionarioJugadores[message.author.id].clase.atk;
