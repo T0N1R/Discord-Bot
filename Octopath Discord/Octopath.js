@@ -146,13 +146,6 @@ function statusEnemy(){
     
 }
 
-var ataqueT = function (nombre){
-    canal.send(nombre + " has recibido 100 de daño"  );
-}
-
-var esquivado = function (nombre){
-    canal.send("El enemigo ataca a " + nombre + " pero esquiva el ataque");
-}
 
 function ataqueEnemigo1(id){
     diccionarioJugadores[id].clase.vida = diccionarioJugadores[id].clase.vida - 100;
@@ -410,6 +403,7 @@ client.on('message', message =>{
                 message.channel.send(enemigo.nombre + " Ha sido derrotado!!!!!!");
                 oponente = false;
                 delete enemigo;
+                delete peleadores;
                 
             }else{
                 enemigo.vida = enemigo.vida - diccionarioJugadores[message.author.id].clase.atk;
@@ -445,6 +439,32 @@ client.on('message', message =>{
         for (x = 0; x < peleadores.length; x++){
             message.channel.send(diccionarioUsuarios[peleadores[x]] + " | Vida: " + diccionarioJugadores[peleadores[x]].clase.vida);
         }
+    }
+
+    if(message.content.startsWith('curar')) {
+        usuario = message.content.split(" ");
+        console.log(peleadores);
+        for (x = 0; x < peleadores.length; x++){
+            if (diccionarioUsuarios[peleadores[x]] == usuario[1]){
+                var identificador = peleadores[x];
+                console.log(identificador);
+
+                diccionarioJugadores[identificador].clase.vida = diccionarioJugadores[identificador].clase.vida + 60;
+                message.channel.send(usuario[1]);
+                num = Math.round(Math.random());
+                if (num == 0){
+                    ataqueEnemigo1(message.author.id);
+                    canal.send(message.author + " has recibido 100 de daño"  );
+                }
+
+                if (num == 1){
+                    canal.send(message.author + ". El enemigo ataca pero esquivaste el ataque");
+                }
+
+            }
+        }
+        
+        
     }
 
 });
