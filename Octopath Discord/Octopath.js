@@ -89,7 +89,7 @@ scholar = new Class(1, 200, 60, 72, 72, 104, 96, 72, "Staff", null, "Fire Ball",
 merchant = new Class(1, 275, 50, 88, 80, 88, 80, 72, "Lance", "Bow", "Collect", "Tradewinds", "Rest", "Trade Tempest", "Donate BP", "Sidestep", "Hired Help", "Bifelgan's Bounty", "Basic atk", "Defend", 1, null, 275);
 
 //Olberic
-warrior = new Class(1, 325, 40, 96, 88, 72, 64, "Sword", "Lance", "Level Slash", "Abide", "Spearhead", "Incite", "Cross Strike", "Stout Wall", "Thousand Spears", "Brands's Thunder", "Basic atk", "Defend", 1, null, 325);
+warrior = new Class(1, 325, 40, 96, 88, 72, 64, "Sword", "Lance", "Level Slash", "Abide", "Spearhead", "Incite", "Cross Strike", "Stout Wall", "Thousand Spears", "Brands's Thunder", "Basic atk", "Defend", 1, null, 325, 325);
 
 //Primrose
 dancer = new Class(1, 225, 50, 80, 56, 96, 64, 104, "Dagger", null, "Lion Dance", "Moonlight Waltz", "Peacock Strut", "Mole Dance", "Night Ode", "Panther Dance", "Bewildering Grace", "Sealticge's Seduction", "Basic atk", "Defend", 1, null, 225);
@@ -109,6 +109,7 @@ oponente = false;
 
 enemy1 = new Enemy("Steorra", 200, 7, ["Sword", "Dagger", "Fire", "Ice", "Rod"], 20000, 1200, 100, 200, 150);
 enemy2 = new Enemy("Balogar", 500, 7, ["Sword", "Dagger", "Fire", "Ice", "Rod"], 20000, 1200, 100, 200, 150);
+enemy3 = new Enemy("Guardian", 1000, 7, ["Sword", "Dagger", "Fire", "Ice", "Rod"], 20000, 1200, 100, 200, 150);
 
 
 
@@ -139,6 +140,7 @@ var timer = function (){
 function recuperarVida(){
     enemy1.vida = 200;
     enemy2.vida = 500;
+    enemy3.vida = 1000;
 }
 
 function statusEnemy(){
@@ -378,7 +380,9 @@ client.on('message', message =>{
 
     if(message.content === 'battle'){
         if(oponente === false){
-            num = Math.round(Math.random());
+            //num = Math.round(Math.random());
+            num = Math.floor(Math.random() * (2 - 0 + 1)) + 0;
+            console.log(num);
             if (num == 0){
                 recuperarVida();
                 enemigo = Object.assign(enemy1);
@@ -389,6 +393,11 @@ client.on('message', message =>{
             if (num == 1){
                 recuperarVida();
                 enemigo = Object.assign(enemy2);
+            }
+
+            if (num == 2){
+                recuperarVida();
+                enemigo = Object.assign(enemy3);
             }
             
             message.channel.send(message.author + " La pelea va a iniciar, ingresa join en 30 segundos");
@@ -421,7 +430,7 @@ client.on('message', message =>{
                 }
                 oponente = false;
                 delete enemigo;
-                delete peleadores;
+                peleadores = [];
                 
             }else{
                 enemigo.vida = enemigo.vida - diccionarioJugadores[message.author.id].clase.atk;
