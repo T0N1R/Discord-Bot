@@ -6,7 +6,7 @@ const client = new Discord.Client();
 
 client.login('');
 
-function Class(nivel, vida, sp, atk, def, ElemAtk, ElemDef, speed, tipoArma1, tipoArma2, special1, special2, special3, special4, special5, special6, special7, special8, hit, defend, bp, status) {
+function Class(nivel, vida, sp, atk, def, ElemAtk, ElemDef, speed, tipoArma1, tipoArma2, special1, special2, special3, special4, special5, special6, special7, special8, hit, defend, bp, status, vidaBase) {
     this.nivel = nivel;
     this.vida = vida;
     this.sp = sp;
@@ -29,6 +29,7 @@ function Class(nivel, vida, sp, atk, def, ElemAtk, ElemDef, speed, tipoArma1, ti
     this.defend = defend;
     this.bp = bp;
     this.status = status;
+    this.vidaBase = vidaBase;
     this.identify = function () {
         console.log("Stats:"  + "\n" + "*******************************************************")
         console.log(`Nivel:  ${this.nivel} \nVida: ${this.vida} \nSP: ${this.sp} \nAtk: ${this.atk} \nDef: ${this.def} \nElemAtk: ${this.ElemAtk} \nElemDef: ${this.ElemDef} \nSpeed: ${this.speed}`);
@@ -55,7 +56,7 @@ function Character(peleando, nombre, personaDiscord, descripcionClase, clase, ar
     }
 }
 
-function Enemy(nombre, vida, escudo, debilidad, oro, jp, ataque1, ataque2, ataque3){
+function Enemy(nombre, vida, escudo, debilidad, oro, jp, ataque1, ataque2, ataque3, vidaBase){
     this.nombre = nombre;
     this.vida = vida;
     this.escudo = escudo;
@@ -65,6 +66,7 @@ function Enemy(nombre, vida, escudo, debilidad, oro, jp, ataque1, ataque2, ataqu
     this.ataque1 = ataque1;
     this.ataque2 = ataque2;
     this.ataque3 = ataque3;
+    this.vidaBase = vidaBase;
 }
 
 var canal;
@@ -78,28 +80,28 @@ enemigo = [];
 //https://docs.google.com/spreadsheets/d/1X-XO1bXJR90wMq3siW22ioERRKzgAUXob_yDpdpM25o/edit#gid=279719304
 
 //Ophilia
-cleric = new Class(1, 225, 65, 80, 80, 96, 104, 64, "Staff", null, "Heal Wounds", "Holy Light", "Sherlering Veil", "Luminescence", "Heal More", "Reflective Veil", "Revive", "Aelfric's Auspices", "Basic atk", "Defend", 1, null);
+cleric = new Class(1, 225, 65, 80, 80, 96, 104, 64, "Staff", null, "Heal Wounds", "Holy Light", "Sherlering Veil", "Luminescence", "Heal More", "Reflective Veil", "Revive", "Aelfric's Auspices", "Basic atk", "Defend", 1, null, 225);
 
 //Cyrus
-scholar = new Class(1, 200, 60, 72, 72, 104, 96, 72, "Staff", null, "Fire Ball", "Icewind", "Lightning Bolt", "Analyze", "Fire Storm", "Blizzard", "Lightning Blast", "Alephan's Enlightenment", "Basic atk", "Defend", 1, null);
+scholar = new Class(1, 200, 60, 72, 72, 104, 96, 72, "Staff", null, "Fire Ball", "Icewind", "Lightning Bolt", "Analyze", "Fire Storm", "Blizzard", "Lightning Blast", "Alephan's Enlightenment", "Basic atk", "Defend", 1, null, 200);
 
 //Tressa
-merchant = new Class(1, 275, 50, 88, 80, 88, 80, 72, "Lance", "Bow", "Collect", "Tradewinds", "Rest", "Trade Tempest", "Donate BP", "Sidestep", "Hired Help", "Bifelgan's Bounty", "Basic atk", "Defend", 1, null);
+merchant = new Class(1, 275, 50, 88, 80, 88, 80, 72, "Lance", "Bow", "Collect", "Tradewinds", "Rest", "Trade Tempest", "Donate BP", "Sidestep", "Hired Help", "Bifelgan's Bounty", "Basic atk", "Defend", 1, null, 275);
 
 //Olberic
-warrior = new Class(1, 325, 40, 96, 88, 72, 64, "Sword", "Lance", "Level Slash", "Abide", "Spearhead", "Incite", "Cross Strike", "Stout Wall", "Thousand Spears", "Brands's Thunder", "Basic atk", "Defend", 1, null);
+warrior = new Class(1, 325, 40, 96, 88, 72, 64, "Sword", "Lance", "Level Slash", "Abide", "Spearhead", "Incite", "Cross Strike", "Stout Wall", "Thousand Spears", "Brands's Thunder", "Basic atk", "Defend", 1, null, 325);
 
 //Primrose
-dancer = new Class(1, 225, 50, 80, 56, 96, 64, 104, "Dagger", null, "Lion Dance", "Moonlight Waltz", "Peacock Strut", "Mole Dance", "Night Ode", "Panther Dance", "Bewildering Grace", "Sealticge's Seduction", "Basic atk", "Defend", 1, null);
+dancer = new Class(1, 225, 50, 80, 56, 96, 64, 104, "Dagger", null, "Lion Dance", "Moonlight Waltz", "Peacock Strut", "Mole Dance", "Night Ode", "Panther Dance", "Bewildering Grace", "Sealticge's Seduction", "Basic atk", "Defend", 1, null, 225);
 
 //Alfyn
-apothecary = new Class(1, 300, 50, 88, 80, 80, 80, 64, "Axe", null, "First Aid", "Icicle", "Rehabilitate", "Amputation", "Empoison", "Vivify", "Last Stand", "Dohter's Charity", "Basic atk", "Defend", 1, null);
+apothecary = new Class(1, 300, 50, 88, 80, 80, 80, 64, "Axe", null, "First Aid", "Icicle", "Rehabilitate", "Amputation", "Empoison", "Vivify", "Last Stand", "Dohter's Charity", "Basic atk", "Defend", 1, null, 300);
 
 //Therion
-thief = new Class(1, 250, 40, 88, 64, 80, 64, 96, "Dagger", "Sword", "Steal", "Wildfire", "HP Thief", "Shackle Foe", "Armor Corrosive", "Steal SP", "Share SP", "Aeber's Reckoning");
+thief = new Class(1, 250, 40, 88, 64, 80, 64, 96, "Dagger", "Sword", "Steal", "Wildfire", "HP Thief", "Shackle Foe", "Armor Corrosive", "Steal SP", "Share SP", "Aeber's Reckoning", "Basic atk", "Defend", 1, null, 250);
 
 //Haanit
-hunter = new Class(1, 250, 40, 96, 64, 80, 64, 80, "Bow", "Axe", "Rain of Arrows", "True Strike", "Thunderbird", "Leghold Trap", "Mercy Strike", "Arrowstorm", "Take Aim", "Draefindi's Rage", "Basic atk", "Defend", 1, null);
+hunter = new Class(1, 250, 40, 96, 64, 80, 64, 80, "Bow", "Axe", "Rain of Arrows", "True Strike", "Thunderbird", "Leghold Trap", "Mercy Strike", "Arrowstorm", "Take Aim", "Draefindi's Rage", "Basic atk", "Defend", 1, null, 250);
 
 //oponente es falso
 oponente = false;
@@ -358,8 +360,8 @@ client.on('message', message =>{
             message.author.send("", {files: ["C:/Users/Antonio/Documents/Stuff/Discord-Bot-1/Discord-Bot/Octopath Discord/personajes/" + personaje +".png"]});
             message.author.send(`Personaje: ${diccionarioJugadores[message.author.id].nombre} 
             \nClase: ${diccionarioJugadores[message.author.id].descripcionClase}
-            \nNivel: ${diccionarioJugadores[message.author.id].nivel} 
-            \nVida: ${diccionarioJugadores[message.author.id].clase.vida}
+            \nNivel: ${diccionarioJugadores[message.author.id].clase.nivel} 
+            \nVida: ${diccionarioJugadores[message.author.id].clase.vida} / ${diccionarioJugadores[message.author.id].clase.vidaBase}
             \nAtaque: ${diccionarioJugadores[message.author.id].clase.atk}
             \nDefensa: ${diccionarioJugadores[message.author.id].clase.def}`
             );
@@ -401,6 +403,14 @@ client.on('message', message =>{
         if (enemigo.vida > 0 && message.author.id in diccionarioJugadores == true && oponente === true){
             if ((enemigo.vida - diccionarioJugadores[message.author.id].clase.atk) < 0){
                 message.channel.send(enemigo.nombre + " Ha sido derrotado!!!!!!");
+                for (x = 0; x < peleadores.length; x++){
+                    diccionarioJugadores[peleadores[x]].clase.nivel = diccionarioJugadores[peleadores[x]].clase.nivel + 1;
+                    diccionarioJugadores[peleadores[x]].clase.atk = diccionarioJugadores[peleadores[x]].clase.atk + 2;
+                    diccionarioJugadores[peleadores[x]].clase.def = diccionarioJugadores[peleadores[x]].clase.def + 2;
+                    diccionarioJugadores[peleadores[x]].clase.vidaBase = diccionarioJugadores[peleadores[x]].clase.vidaBase + 5;
+                    message.channel.send(diccionarioUsuarios[peleadores[x]] + " Has subido de nivel!");
+                    diccionarioJugadores[peleadores[x]].clase.vida = diccionarioJugadores[peleadores[x]].clase.vidaBase;
+                }
                 oponente = false;
                 delete enemigo;
                 delete peleadores;
@@ -413,6 +423,13 @@ client.on('message', message =>{
                 if (num == 0){
                     ataqueEnemigo1(message.author.id);
                     canal.send(message.author + " has recibido 100 de daño"  );
+                    if (diccionarioJugadores[message.author.id].clase.vida < 0){
+                        peleadores.splice( peleadores.indexOf(message.author.id), 1);
+                    }
+                    if (peleadores.length == 0){
+                        message.channel.send("Todos los jugadores han sido derrotados");
+                        oponente = false;
+                    }
                 }
 
                 if (num == 1){
@@ -437,7 +454,7 @@ client.on('message', message =>{
 
     if (message.content == 'party'){
         for (x = 0; x < peleadores.length; x++){
-            message.channel.send(diccionarioUsuarios[peleadores[x]] + " | Vida: " + diccionarioJugadores[peleadores[x]].clase.vida);
+            message.channel.send(diccionarioUsuarios[peleadores[x]] + " | Vida: " + diccionarioJugadores[peleadores[x]].clase.vida + "/" + diccionarioJugadores[peleadores[x]].clase.vidaBase);
         }
     }
 
@@ -450,7 +467,7 @@ client.on('message', message =>{
                 console.log(identificador);
 
                 diccionarioJugadores[identificador].clase.vida = diccionarioJugadores[identificador].clase.vida + 60;
-                message.channel.send(usuario[1]);
+                message.channel.send(usuario[1] + "Ha recibido 60 de vida");
                 num = Math.round(Math.random());
                 if (num == 0){
                     ataqueEnemigo1(message.author.id);
