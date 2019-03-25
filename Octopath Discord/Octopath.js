@@ -167,9 +167,17 @@ client.on('message', message =>{
     if(message.content === 'game'){
         console.log(message.author.id)
         message.channel.send(message.author + " Escribe el comando: "+ '\n' +
-        "OCTcreate: Crear personaje (si no se tiene)" + '\n' + 
-        "OCTdelete: Eliminar personaje (empezar desde cero)" + '\n'
-        )
+        "OCTcreate: Lista de personaje que puede crear (si no se tiene)" + '\n' + 
+        "OCTdelete: Eliminar personaje (empezar desde cero)" + '\n' +
+        "online: Lista de jugaores con personaje" + '\n' +
+        "my character: Envia mensaje privado con los stats de tu personaje" + '\n' +
+        "battle: Iniciar pelea con un enemigo" + '\n' + 
+        "join: Unirse al grupo de jugadores que van a pelear" + '\n' + 
+        "party: lista de personajes que todavia pueden pelear con el enemigo" + '\n' +
+        "enemy: Mostrar datos del enemigo (se tuvo que escribir battle primero)" + '\n' +
+        "attack: Atacar al enemigo" + '\n' + 
+        "curar + jugador: Curar al jugador (debe estar adentro de  party)"
+        );
     }
 
     if(message.content === 'OCTcreate'){
@@ -345,7 +353,7 @@ client.on('message', message =>{
         }
     }
 
-    if(message.content === 'activos'){
+    if(message.content === 'online'){
         let a = []
         for (var key in diccionarioUsuarios){
             a.push(diccionarioUsuarios[key])
