@@ -67,13 +67,6 @@ async def ping(ctx):
 async def marco(ctx):
     await ctx.send('polo')
 
-# .tgs
-# respuesta: meme de Fallout
-
-
-@bot.command()
-async def tgs(ctx):
-    await ctx.send('https://i.imgur.com/OEW2hx5.jpg')
 
 # .animemes
 # respuesta: meme de Animemes
@@ -180,18 +173,6 @@ async def pewds(ctx):
     num = random.randint(0, 99)
 
     await ctx.send(lista_memes[num])
-
-# .lista
-# repuesta: lista de comandos
-@bot.command()
-async def lista(ctx):
-    await ctx.send('comandos que sirven: ' + '\n' + '.animemes' + '\n' + '.padoru' + '\n'
-                   + '.tgs' + '\n' + '.ping' + '\n' + '.marco' +
-                   '\n' + '.bestgirl' + '\n' + '.fumino' + '\n'
-                   + '.uruka' + '\n' + '.prequel' + '\n' + '.sakura')
-
-
-# async def on_member_update(before,after):
 
 
 bot.run(token)
